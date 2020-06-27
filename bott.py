@@ -16,4 +16,4 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
-client.run('NzI2NTE0NjYwNjk3NzAyNTIy.XveZmA.6GvBBz4UIJdGvkJ_M4FE3PbqOJ4')
+client.run(os.environ['Discord_Token'])
