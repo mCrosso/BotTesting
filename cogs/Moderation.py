@@ -6,7 +6,8 @@ class Moderation(commands.Cog):
     def __init__(self, client):
         self.client = client
     @commands.command()
-    async def purge(self, ctx, amount=15):
+    @commands.has_permissions(administrator=True)
+    async def purge(self, ctx, amount=100):
         if ctx.author == self.client:
             return
         await ctx.message.delete(delay=None)

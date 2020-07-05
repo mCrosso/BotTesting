@@ -9,6 +9,25 @@ class Funcommands(commands.Cog, name='Fun commands'):
     def __init__(self, client):
         self.client = client
 
+    @commands.command()
+    async def say(self, ctx, *, message):
+        await ctx.message.delete()
+        await ctx.send(message)
+
+    @commands.command(aliases=['ppsize'], name='pp')
+    async def _ppsize(self, ctx, user: discord.User = None):
+        user = ctx.author if not user else user
+        colors = [0xFF0000, 0x000000, 0x0000FF, 0x008000, 0xFFFF00, 0xFFA500, 0x800080]
+        randomchoice = random.choice(colors)
+        value = random.randint(0, 15)
+        embed = discord.Embed(
+            title=user.name + "'s pp",
+            description=('8' + ('=' * value) + 'D'),
+            color=randomchoice)
+        await ctx.send(embed=embed)
+        global deschelp
+        deschelp = 'Check your pp size'
+
     @commands.command(name='8ball')
     async def _8ball(self, ctx):
         responses = ['It is certain.', 'It is decidedly so.', 'Without a doubt.', 'Yes – definitely.',
