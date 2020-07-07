@@ -64,7 +64,7 @@ class Leveling(commands.Cog):
             description=f"{user.name}'s level is {result[0]} and has {result2[0]} exp.",
             color=0xecce8b)
         pfp = user.avatar_url
-        embed.set_author(name=user.name, icon_url=ctx.author.avatar_url)
+        embed.set_author(name=user.name, icon_url=user.avatar_url)
         await ctx.send(embed=embed)
 
 
