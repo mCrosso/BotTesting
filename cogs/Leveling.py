@@ -60,8 +60,12 @@ class Leveling(commands.Cog):
         result = cursor.fetchone()
         cursor.execute(f"SELECT exp FROM lvls WHERE guild_id = {ctx.message.guild.id} and user_id = {user.id}")
         result2 = cursor.fetchone()
-
-        await ctx.send(f"{user.name}'s level is {result[0]} and has {result2[0]} exp.")
+        embed = discord.Embed(
+            description=f"{user.name}'s level is {result[0]} and has {result2[0]} exp.",
+            color=0xecce8b)
+        pfp = user.avatar_url
+        embed.set_author(name=user.name, icon_url=ctx.author.avatar_url)
+        await ctx.send(embed=embed)
 
 
 
