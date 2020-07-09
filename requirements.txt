@@ -1,6 +1,2 @@
 discord
-PIL
-pip3 install pillow
-pillow
-Pillow
-Pil
+PIL==1.1.7
