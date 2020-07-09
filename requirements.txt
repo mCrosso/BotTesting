@@ -1,6 +1,6 @@
+aiohttp==3.6.2
 altgraph==0.17
-aimation==0.0.6
-Pillow == 7.1.2
+animation==0.0.6
 async-timeout==3.0.1
 attrs==19.3.0
 auto-py-to-exe==2.7.4
@@ -11,6 +11,8 @@ chardet==3.0.4
 colorama==0.4.3
 cx-Freeze==6.1
 dhooks==1.1.3
+discord==1.0.1
+discord.py==1.3.3
 eel==0.11.0
 emoji==0.5.4
 future==0.18.2
@@ -20,6 +22,7 @@ multidict==4.7.6
 numpy==1.18.5
 opencv-python==4.2.0.34
 pefile==2019.4.18
+Pillow==7.1.2
 playsound==1.2.2
 pluginbase==1.0.0
 psutil==5.7.0
