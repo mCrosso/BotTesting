@@ -1,2 +1,2 @@
 discord
-PIL==1.1.7
+Pillow==1.1.7
