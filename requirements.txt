@@ -1,6 +1,6 @@
 altgraph==0.17
-animation==0.0.6
-pillow == 7.1.2
+aimation==0.0.6
+Pillow == 7.1.2
 async-timeout==3.0.1
 attrs==19.3.0
 auto-py-to-exe==2.7.4
