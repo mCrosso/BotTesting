@@ -121,6 +121,15 @@ class Funcommands(commands.Cog, name='Fun commands'):
         embed.set_author(name=f'Truth Machine', icon_url=ctx.author.avatar_url)
         await ctx.send(embed=embed)
 
+    @commands.command(aliases=['Achievement'], description='Test')
+    async def achievement(self, ctx, *,msg):
+        msg1 = msg.replace(' ', '+')
+        num = random.randint(1, 29)
+        imgurl = f'https://minecraftskinstealer.com/achievement/{num}/Achievement+Get%21/{msg1}'
+        embed = discord.Embed()
+        embed.set_image(url=imgurl)
+        await ctx.send(embed=embed)
+
 
 def setup(client):
     client.add_cog(Funcommands(client))
