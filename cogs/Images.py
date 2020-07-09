@@ -1,8 +1,5 @@
 import random
-import Image
-import ImageFont
-import ImageDraw
-import ImageFilter
+from PIL import Image, ImageFont, ImageDraw, ImageFilter
 import requests
 from io import BytesIO
 import discord
