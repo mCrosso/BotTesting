@@ -5,8 +5,6 @@ from io import BytesIO
 import discord
 from discord.ext import commands
 from discord.ext.commands import bot
-from functools import partial
-import aiohttp
 import os
 
 class Images(commands.Cog):
