@@ -53,3 +53,7 @@ websockets==8.1
 whichcraft==0.6.1
 yarl==1.4.2
 youtube-dl==2020.6.16.1
+Image
+ImageFont
+ImageDraw
+ImageFilter
