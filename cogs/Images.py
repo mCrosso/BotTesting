@@ -17,7 +17,6 @@ class Images(commands.Cog):
             user = ctx.author
         response = requests.get(user.avatar_url)
         img = Image.open(BytesIO(response.content))
-        #----------------------------------------------------------------------
         img_fraction = 0.50
         W, H = (128, 128)
         fs = 1
@@ -26,7 +25,6 @@ class Images(commands.Cog):
         while font_type.getsize(txt)[0] < img_fraction * img.size[0]:
             fs += 1
             font_type = ImageFont.truetype("arial.ttf", fs)
-        # ----------------------------------------------------------------
         draw = ImageDraw.Draw(img)
         w, h = draw.textsize(txt)
         draw.text(((W - w) / 2, (H - h) / 2), text=txt, fill=(255, 255, 255), font=font_type)
