@@ -34,7 +34,7 @@ class Leveling(commands.Cog):
             cursor.execute(
                 f"SELECT user_id, exp, lvl FROM lvls WHERE guild_id = '{message.guild.id}' and user_id = '{message.author.id}'")
             result2 = cursor.fetchone()
-
+            global xp_end
             xp_start = int(result2[1])
             lvl_start = int(result2[2])
             xp_end = math.floor(5 * (lvl_start ** 2) * 2 + 50 * lvl_start + 100)
@@ -64,21 +64,8 @@ class Leveling(commands.Cog):
             description=f"{user.name}'s level is {result[0]} and has {result2[0]} exp.",
             color=0xecce8b)
         pfp = user.avatar_url
-        embed.set_author(name=user.name, icon_url=user.avatar_url)
+        embed.set_author(name=user.name, icon_url=ctx.author.avatar_url)
         await ctx.send(embed=embed)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 def setup(client):

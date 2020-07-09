@@ -10,19 +10,18 @@ class Currency(commands.Cog):
     def __init__(self, client):
         self.client = client
 
-    @commands.command()
-    async def createacc(self, ctx):
+    @commands.Cog.listener()
+    async def on_message(self, ctx):
         name = ctx.author
         name2 = f"'{name.id}'"
         db = sqlite3.connect('main.sqlite')
         cursor = db.cursor()
-        sql = (f'INSERT INTO main (Username, Balance, Job, Jm)'
+        sql = (f'INSERT OR IGNORE INTO main (Username, Balance, Job, Jm)'
                f'VALUES(({name2}), (0), ("No job"), (0))')
         cursor.execute(sql)
         db.commit()
         cursor.close()
         db.close()
-        await ctx.send('Account made!')
 
     @commands.command(aliases=['balance', 'Balance', 'Bal'])
     async def bal(self, ctx, member: discord.User = None):
@@ -54,7 +53,6 @@ class Currency(commands.Cog):
     @bal.error
     async def on_error(self, ctx, error):
         await ctx.send("The mentioned user doesn't have an account")
-    @commands.cooldown(2, 3594, commands.BucketType.user)
     @commands.group()
     async def jobs(self, ctx):
         if ctx.invoked_subcommand is None:
@@ -72,44 +70,103 @@ class Currency(commands.Cog):
         error3 = round(float(float(error2) / 60))
         await ctx.send(f"You're on cooldown. Try again in {error3} minutes.")
 
-    @jobs.command()
+    @jobs.command(aliases=['driver'])
     async def Driver(self, ctx):
         db = sqlite3.connect('main.sqlite')
         cursor = db.cursor()
-        sql = f"UPDATE main SET Job = 'Taxi Driver' WHERE Username = '{ctx.author.id}'"
-        sql2 = f"UPDATE main SET Jm = 20 WHERE Username = '{ctx.author.id}'"
-        cursor.execute(sql2)
-        cursor.execute(sql)
-        db.commit()
-        cursor.close()
-        db.close()
-        await ctx.send("You're now working as a Taxi Driver!")
-    @jobs.command()
+        cursor.execute(f"SELECT Job FROM main WHERE Username = '{ctx.author.id}'")
+        res = cursor.fetchone()
+        if res[0] == 'Taxi Driver':
+            await ctx.send("You're already a Taxi Driver.")
+        else:
+            sql = f"UPDATE main SET Job = 'Taxi Driver' WHERE Username = '{ctx.author.id}'"
+            sql2 = f"UPDATE main SET Jm = 20 WHERE Username = '{ctx.author.id}'"
+            cursor.execute(sql2)
+            cursor.execute(sql)
+            db.commit()
+            cursor.close()
+            db.close()
+            await ctx.send(f"You're now working as a Taxi Driver!")
+
+    @jobs.command(aliases=['Cam Girl', 'cam girl', 'camgirl', 'Camgirl', 'camGirl', 'cam', 'Cam'])
+    async def CamGirl(self, ctx):
+        db = sqlite3.connect('main.sqlite')
+        cursor = db.cursor()
+        cursor.execute(f"SELECT Username FROM main WHERE Username = '{ctx.author.id}'")
+        res = cursor.fetchone()
+        if res[0] != '638814602829889559':
+            await ctx.send("You can't use this command.")
+        else:
+            cursor.execute(f"SELECT Job FROM main WHERE Username = '{ctx.author.id}'")
+            res2 = cursor.fetchone()
+            if res2[0] == 'Cam Girl':
+                await ctx.send("You're already a Cam Girl")
+            else:
+                sql = f"UPDATE main SET Job = 'Cam Girl' WHERE Username = '{ctx.author.id}'"
+                sql2 = f"UPDATE main SET Jm = 120 WHERE Username = '{ctx.author.id}'"
+                cursor.execute(sql2)
+                cursor.execute(sql)
+                db.commit()
+                cursor.close()
+                db.close()
+                await ctx.send(f"You're now working as a Cam Girl!")
+
+    @jobs.command(aliases=['egirl', 'Egirl'])
+    async def eGirl(self, ctx):
+        db = sqlite3.connect('main.sqlite')
+        cursor = db.cursor()
+        cursor.execute(f"SELECT Username FROM main WHERE Username = '{ctx.author.id}'")
+        res = cursor.fetchone()
+        if res[0] != '361541867508334594':
+            await ctx.send("You can't use this command.")
+        else:
+            cursor.execute(f"SELECT Job FROM main WHERE Username = '{ctx.author.id}'")
+            res2 = cursor.fetchone()
+            if res2[0] == 'eGirl':
+                await ctx.send("You're already an eGirl")
+            else:
+                sql = f"UPDATE main SET Job = 'eGirl' WHERE Username = '{ctx.author.id}'"
+                sql2 = f"UPDATE main SET Jm = 120 WHERE Username = '{ctx.author.id}'"
+                cursor.execute(sql2)
+                cursor.execute(sql)
+                db.commit()
+                cursor.close()
+                db.close()
+                await ctx.send(f"You're now an eGirl!")
+    @jobs.command(aliases=['developer'])
     async def Developer(self, ctx):
         db = sqlite3.connect('main.sqlite')
         cursor = db.cursor()
-        sql = f"UPDATE main SET Job = 'Developer' WHERE Username = '{ctx.author.id}'"
-        sql2 = f"UPDATE main SET Jm = 50 WHERE Username = '{ctx.author.id}'"
-        cursor.execute(sql2)
-        cursor.execute(sql)
-        db.commit()
-        cursor.close()
-        db.close()
-        await ctx.send("You're now working as a Developer!")
-
-    @jobs.command()
+        cursor.execute(f"SELECT Job FROM main WHERE Username = '{ctx.author.id}'")
+        res = cursor.fetchone()
+        if res[0] == 'Developer':
+            await ctx.send("You're already a developer.")
+        else:
+            sql = f"UPDATE main SET Job = 'Developer' WHERE Username = '{ctx.author.id}'"
+            sql2 = f"UPDATE main SET Jm = 50 WHERE Username = '{ctx.author.id}'"
+            cursor.execute(sql2)
+            cursor.execute(sql)
+            db.commit()
+            cursor.close()
+            db.close()
+            await ctx.send("You're now working as a Developer!")
+    @jobs.command(aliases=['streamer'])
     async def Streamer(self, ctx):
         db = sqlite3.connect('main.sqlite')
         cursor = db.cursor()
-        sql = f"UPDATE main SET Job = 'Streamer' WHERE Username = '{ctx.author.id}'"
-        sql2 = f"UPDATE main SET Jm = 100 WHERE Username = '{ctx.author.id}'"
-        cursor.execute(sql2)
-        cursor.execute(sql)
-        db.commit()
-        cursor.close()
-        db.close()
-        await ctx.send("You're now working as a Streamer!")
-
+        cursor.execute(f"SELECT Job FROM main WHERE Username = '{ctx.author.id}'")
+        res = cursor.fetchone()
+        if res[0] == 'Streamer':
+            await ctx.send("You're already a streamer.")
+        else:
+            sql = f"UPDATE main SET Job = 'Streamer' WHERE Username = '{ctx.author.id}'"
+            sql2 = f"UPDATE main SET Jm = 100 WHERE Username = '{ctx.author.id}'"
+            cursor.execute(sql2)
+            cursor.execute(sql)
+            db.commit()
+            cursor.close()
+            db.close()
+            await ctx.send("You're now working as a Streamer!")
     @commands.cooldown(1, 3594, commands.BucketType.user)
     @commands.command()
     async def work(self, ctx):
