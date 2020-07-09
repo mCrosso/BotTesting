@@ -1,14 +1,12 @@
 import random
-import Image
-import ImageFont
-import ImageDraw
-import ImageFilter
+from PIL import Image, ImageFont, ImageDraw, ImageFilter
 import requests
 from io import BytesIO
 import discord
 from discord.ext import commands
 from discord.ext.commands import bot
 import os
+
 
 class Images(commands.Cog):
     def __init__(self, client):
