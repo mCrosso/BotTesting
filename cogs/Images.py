@@ -23,5 +23,9 @@ class Images(commands.Cog):
         await ctx.send(file=discord.File('img.jpg'))
         os.remove('img.jpg')
 
+
+
+
+
 def setup(client):
     client.add_cog(Images(client))

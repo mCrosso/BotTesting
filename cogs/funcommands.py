@@ -130,6 +130,29 @@ class Funcommands(commands.Cog, name='Fun commands'):
         embed.set_image(url=imgurl)
         await ctx.send(embed=embed)
 
+    @commands.command()
+    async def slap(self, ctx, user: discord.User = None):
+        if not user:
+            await ctx.send("Please mention a user.")
+        else:
+            background = Image.open('images.jpg')
+            response = requests.get(ctx.author.avatar_url)
+            me = Image.open(BytesIO(response.content))
+            size = 64, 64
+            me.thumbnail(size, Image.ANTIALIAS)
+            back_im = background.copy()
+            offset = 210, 20
+            back_im.paste(me, offset)
+            back2 = back_im.copy()
+            response = requests.get(user.avatar_url)
+            me2 = Image.open(BytesIO(response.content))
+            size2 = 85, 85
+            me2.thumbnail(size2, Image.ANTIALIAS)
+            offset2 = 89, 50
+            back2.paste(me2, offset2)
+            back2.save('imgimg.jpg')
+            await ctx.send(file=discord.File('imgimg.jpg'))
+
 
 def setup(client):
     client.add_cog(Funcommands(client))
