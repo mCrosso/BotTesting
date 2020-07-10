@@ -2,6 +2,10 @@ import random
 import discord
 from PIL import Image, ImageFont, ImageDraw, ImageFilter
 from discord.ext import commands
+import requests
+from io import BytesIO
+from discord.ext.commands import bot
+import os
 
 
 class Funcommands(commands.Cog, name='Fun commands'):
